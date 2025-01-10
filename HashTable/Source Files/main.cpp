@@ -1,5 +1,6 @@
 ﻿#include "../Header Files/menu.h"
 #include "../Header Files/Dictionary.h"
+#include "../Header Files/HashTable.h"
 #include <iostream>
 #include <limits>
 
@@ -7,82 +8,151 @@ void InvalidInput();
 
 int main()
 {
-    Dictionary dict;
-    bool exit = false;
+    bool exitProgram = false;
 
-    while (!exit) 
+    while (!exitProgram)
     {
-        ShowMenu();
-        int choice;
-        std::cin >> choice;
+      bool useHashTable = ChooseDataStructure(exitProgram);
 
-        std::string key, value;
-        bool rehashed = false;
+      if (exitProgram)
+      {
+          std::cout << "Exiting program.\n";
+          break;
+      }
+      HashTable* hashTable = nullptr;
+      Dictionary* dictionary = nullptr;
 
-        if (std::cin.fail()) 
-        {
-            InvalidInput(); 
-            continue;       
-        }
+      if (useHashTable)
+      {
+          hashTable = new HashTable();
+      }
+      else
+      {
+          dictionary = new Dictionary();
+      }
 
-        switch (choice) 
-        {
-        case 1: 
-            key = GetKey();
-            std::cout << "Enter value: ";
-            std::cin >> value;
-            rehashed = dict.Add(key, value);
+      bool exitStructure = false;
 
-            if (rehashed) 
-            {
-                std::cout << "Rehashing occurred. Table size increased.\n";
-            }
-            else 
-            {
-                std::cout << "Added successfully!\n";
-            }
-   
-            break;
+      while (!exitStructure)
+      {
+          ShowMenu();
+          int choice;
+          std::cin >> choice;
+          std::string key, value;
 
-        case 2: 
-            key = GetKey();
-            if (dict.Delete(key, value))
-            {
-                std::cout << "Removed value: " << value << "\n";
-            }
-            else {
-                std::cout << "Key not found!\n";
-            }
-            break;
+          if (std::cin.fail())
+          {
+              InvalidInput();
+              continue;
+          }
 
-        case 3: 
-            key = GetKey();
-            if (dict.Search(key, value)) 
-            {
-                std::cout << "Value: " << value << "\n";
-            }
-            else {
-                std::cout << "Key not found!\n";
-            }
-            break;
+          switch (choice)
+          {
+          case 1:
+              key = GetKey();
+              std::cout << "Enter value: ";
+              std::cin >> value;
+
+              if (useHashTable)
+              {
+                  hashTable->AddElement(key, value);
+                  std::cout << "Added successfully!\n";
+              }
+              else
+              {
+                  dictionary->Add(key, value);
+                  std::cout << "Added successfully!\n";
+              }
+
+              break;
+
+          case 2:
+              key = GetKey();
+              if (useHashTable)
+              {
+                  if (hashTable->RemoveItem(key, value))
+                  {
+                      std::cout << "Removed value: " << value << "\n";
+                  }
+                  else
+                  {
+                      std::cout << "Key not found.\n";
+                  }
+              }
+              else
+              {
+                  if (dictionary->Delete(key, value))
+                  {
+                      std::cout << "Removed value: " << value << "\n";
+                  }
+                  else {
+                      std::cout << "Key not found.\n";
+                  }
+              }
+              break;
+
+          case 3:
+              key = GetKey();
+              if (useHashTable)
+              {
+                  if (hashTable->FindItem(key, value))
+                  {
+                      std::cout << "Found value: " << value << "\n";
+                  }
+                  else
+                  {
+                      std::cout << "Key not found.\n";
+                  }
+              }
+              else
+              {
+                  if (dictionary->Search(key, value))
+                  {
+                      std::cout << "Found value: " << value << "\n";
+                  }
+                  else
+                  {
+                      std::cout << "Key not found.\n";
+                  }
+              }
+              break;
 
 
-        case 4: 
-            ShowHashTable(dict.GetHashTable());
-            break;
+          case 4:
+              if (useHashTable)
+              {
+                  ShowHashTable(hashTable);
+              }
+              else
+              {
+                  ShowDictionary(dictionary);
+              }
+              break;
 
-        case 5: 
-            exit = true;
-            break;
+          case 5:
+              exitStructure = true;
+              break;
 
-        default: 
-            InvalidInput();
-        }
+          default:
+              InvalidInput();
+          }
+      }
+
+      if (useHashTable)
+      {
+          delete hashTable;
+          hashTable = nullptr;
+      }
+      else
+      {
+          delete dictionary;
+          dictionary = nullptr;
+      }
+
     }
 
     return 0;
 }
-
 
 void InvalidInput()
 {

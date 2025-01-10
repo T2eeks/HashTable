@@ -10,7 +10,6 @@ Dictionary::Dictionary()
 Dictionary::~Dictionary()
 {
     _hashTable->DeleteHashTable();
-    delete _hashTable;
 }
 
 bool Dictionary::Add(const std::string& key, const std::string& value)
