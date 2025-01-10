@@ -91,11 +91,6 @@ void HashTable::DeleteHashTable()
 
 int HashTable::AddElement(const std::string& key, const std::string& value) 
 {
-    if (IsNeedToRehashing())
-    {
-        Rehashing();
-    }
-
     int index = PearsonHash(key, _hashTableSize);
     HashTableItem* current = _data[index];
 
@@ -110,7 +105,14 @@ int HashTable::AddElement(const std::string& key, const std::string& value)
 
     _data[index] = new HashTableItem(key, value, _data[index]);
     _length++;
-    return 0;
+
+    if (IsNeedToRehashing())
+    {
+        Rehashing();
+        return true;
+    }
+
+    return false;
 }
 
 

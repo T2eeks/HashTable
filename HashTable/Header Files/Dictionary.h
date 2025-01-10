@@ -18,7 +18,7 @@ public:
     //! \brief Добавить пару ключ-значение
     //! \param key Ключ
     //! \param value Значение
-    void Add(const std::string& key, const std::string& value);
+    bool Add(const std::string& key, const std::string& value);
 
     //! \brief Удалить значение по ключу
     //! \param key Ключ

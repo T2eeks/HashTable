@@ -5,7 +5,6 @@ using namespace std;
 Dictionary::Dictionary() 
 {
     _hashTable = new HashTable; 
-    _hashTable->InitHashTable();
 }
 
 Dictionary::~Dictionary()
@@ -14,9 +13,9 @@ Dictionary::~Dictionary()
     delete _hashTable;
 }
 
-void Dictionary::Add(const std::string& key, const std::string& value)
+bool Dictionary::Add(const std::string& key, const std::string& value)
 {
-    _hashTable->AddElement(key, value); 
+    return _hashTable->AddElement(key, value); 
 }
 
 bool Dictionary::Delete(const std::string& key, std::string& value)

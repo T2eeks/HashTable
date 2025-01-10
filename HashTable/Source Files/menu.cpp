@@ -41,4 +41,5 @@ void ShowMenu()
     std::cout << "4. Show Hash Table\n";
     std::cout << "5. Exit\n";
     std::cout << "Enter your choice: ";
+    std::cout << "\n";
 }

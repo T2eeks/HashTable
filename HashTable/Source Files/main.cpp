@@ -5,15 +5,19 @@
 
 void InvalidInput();
 
-int main() {
+int main()
+{
     Dictionary dict;
     bool exit = false;
 
-    while (!exit) {
+    while (!exit) 
+    {
         ShowMenu();
         int choice;
-
         std::cin >> choice;
+
+        std::string key, value;
+        bool rehashed = false;
 
         if (std::cin.fail()) 
         {
@@ -21,20 +25,23 @@ int main() {
             continue;       
         }
 
-        std::string key, value;
-
-        switch (choice) {
+        switch (choice) 
+        {
         case 1: 
             key = GetKey();
             std::cout << "Enter value: ";
             std::cin >> value;
-            dict.Add(key, value);
-            std::cout << "Added successfully!\n";
+            rehashed = dict.Add(key, value);
 
-            if (dict.GetHashTable()->Rehashing()) 
+            if (rehashed) 
             {
                 std::cout << "Rehashing occurred. Table size increased.\n";
             }
+            else 
+            {
+                std::cout << "Added successfully!\n";
+            }
+   
             break;
 
         case 2: 
