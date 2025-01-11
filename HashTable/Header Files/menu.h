@@ -2,7 +2,7 @@
 #include "HashTable.h"
 #include "Dictionary.h"
 #include <string>
-// TODO: Полетела кодировка
+
 //! \brief Отобразить текущее состояние хеш-таблицы
 //! \param hashTable Указатель на хеш-таблицу
 void ShowHashTable(const HashTable* hashTable);

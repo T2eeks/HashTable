@@ -2,7 +2,6 @@
 #include "HashTable.h"
 #include <string>
 
-// TODO: Полетела кодировка
 //! \brief Класс для работы с хеш-таблицей
 class Dictionary {
 private:

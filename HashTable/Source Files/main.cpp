@@ -6,7 +6,6 @@
 
 void InvalidInput();
 
-// TODO: В словаре не должно быть более одной пары ключ-значение с одим и тем же ключем
 int main()
 {
     bool exitProgram = false;
