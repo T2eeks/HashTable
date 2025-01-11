@@ -3,8 +3,10 @@
 #include <ctime>
 #include <cstdlib>
 
+// TODO: внести в класс HashTable
 static int PearsonHash(const std::string& key, int tableSize)
 {
+    // TODO: Вынести 256 в константу внутри метода
     static std::vector<int> T(256);
     static bool initialized = false;
 
@@ -166,6 +168,7 @@ bool HashTable::RemoveItem(std::string& key, std::string& value)
 
 bool HashTable::IsNeedToRehashing()
 {
+    // TODO: Вынести в константу внутри метода
     return static_cast<double>(_length) / _hashTableSize > 0.8;
 }
 

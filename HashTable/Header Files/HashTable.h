@@ -79,5 +79,4 @@ public:
     //! \brief Выполнить рехэширование хеш-таблицы
     //! \param hashTable Указатель на хеш-таблицу
     bool Rehashing();
-  
 };
