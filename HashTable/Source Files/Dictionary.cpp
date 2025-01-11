@@ -15,12 +15,14 @@ Dictionary::~Dictionary()
 bool Dictionary::Add(const std::string& key, const std::string& value)
 {
     string existingValue;
+    string mutableKey = key;
 
     // TODO: переписывать значение
     if (_hashTable->FindItem(key, existingValue))
     {
-        return false;
+        _hashTable->RemoveItem(mutableKey, existingValue);
     }
+
     _hashTable->AddElement(key, value);
     return true;
 }
