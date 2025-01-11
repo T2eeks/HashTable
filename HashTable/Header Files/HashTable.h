@@ -15,6 +15,13 @@ private:
     //! \brief Массив указателей на элементы таблицы
     HashTableItem** _data;
 
+    //! \brief Размер таблицы Пирсона
+     int _pearsonTable = 256;
+
+    //! \brief Коэфициэнт рехэширования
+    double rehash = 0.8;
+
+
 public:
     //! \brief Конструктор для инициализации хеш-таблицы
     HashTable();
@@ -79,4 +86,7 @@ public:
     //! \brief Выполнить рехэширование хеш-таблицы
     //! \param hashTable Указатель на хеш-таблицу
     bool Rehashing();
+
+    //! \brief  метод для вычисления хеша 
+    int PearsonHash(const std::string& key, int tableSize);
 };

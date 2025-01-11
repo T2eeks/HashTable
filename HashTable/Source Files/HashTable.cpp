@@ -4,25 +4,25 @@
 #include <cstdlib>
 
 // TODO: внести в класс HashTable
-static int PearsonHash(const std::string& key, int tableSize)
+ int HashTable::PearsonHash(const std::string& key, int tableSize)
 {
     // TODO: Вынести 256 в константу внутри метода
-    static std::vector<int> T(256);
+    static std::vector<int> T(_pearsonTable);
     static bool initialized = false;
 
     if (!initialized)
     {
-        for (int i = 0; i < 256; i++) T[i] = i;
+        for (int i = 0; i < _pearsonTable; i++) T[i] = i;
         std::srand(std::time(nullptr));
-        for (int i = 0; i < 256; i++)
+        for (int i = 0; i < _pearsonTable; i++)
         {
-            std::swap(T[i], T[rand() % 256]);
+            std::swap(T[i], T[rand() % _pearsonTable]);
         }
         initialized = true;
     }
 
     int hash = 0;
-    for (char c : key) hash = T[(hash ^ c) % 256];
+    for (char c : key) hash = T[(hash ^ c) % _pearsonTable];
     return hash % tableSize;
 }
 
@@ -169,7 +169,7 @@ bool HashTable::RemoveItem(std::string& key, std::string& value)
 bool HashTable::IsNeedToRehashing()
 {
     // TODO: Вынести в константу внутри метода
-    return static_cast<double>(_length) / _hashTableSize > 0.8;
+    return static_cast<double>(_length) / _hashTableSize > rehash;
 }
 
 bool HashTable::Rehashing()

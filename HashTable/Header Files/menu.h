@@ -3,21 +3,21 @@
 #include "Dictionary.h"
 #include <string>
 // TODO: Полетела кодировка
-//! \brief ���������� ������� ��������� ���-�������
-//! \param hashTable ��������� �� ���-�������
+//! \brief Отобразить текущее состояние хеш-таблицы
+//! \param hashTable Указатель на хеш-таблицу
 void ShowHashTable(const HashTable* hashTable);
 
-//! \brief �������� ������� ��������� �������
-//! \param dictionary ��������� �� �������
+//! \brief Показать текущее состояние словаря
+//! \param dictionary Указатель на словарь
 void ShowDictionary(const Dictionary* dictionary);
 
-//! \brief �������� ���� �� ������������
-//! \return ��������� ����
+//! \brief Получить ключ от пользователя
+//! \return Введенный ключ
 std::string GetKey();
 
-//! \brief �������� ������� ���� ���������
+//! \brief Показать главное меню программы
 void ShowMenu();
 
-//! \brief ����� ��������� ������
-//! \return true, ���� ������� ���-�������; false, ���� ������ �������
+//! \brief Выбор структуры данных
+//! \return true, если выбрана хэш-таблица; false, если выбран словарь
 bool ChooseDataStructure(bool& exitProgram);

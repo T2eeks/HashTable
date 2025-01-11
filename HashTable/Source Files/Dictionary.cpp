@@ -14,7 +14,14 @@ Dictionary::~Dictionary()
 
 bool Dictionary::Add(const std::string& key, const std::string& value)
 {
-    return _hashTable->AddElement(key, value); 
+    string existingValue;
+
+    if (_hashTable->FindItem(key, existingValue))
+    {
+        return false;
+    }
+    _hashTable->AddElement(key, value);
+    return true;
 }
 
 bool Dictionary::Delete(const std::string& key, std::string& value)
